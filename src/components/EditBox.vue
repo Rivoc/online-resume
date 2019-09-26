@@ -1,5 +1,6 @@
 <template>
-  <div id="edit-box">
+  <div id="edit-box"
+       ref="editBox">
     <section class="sideBar">
       <ul>
         <li @click="currentTab=1"
@@ -104,33 +105,25 @@ export default {
     return {
       currentTab: 1
     }
+  },
+  mounted () {
+    let _this = this
+    this.bus.$on('custResume', function () {
+      _this.$refs.editBox.style.cssText = 'transform:translate(0)'
+    })
   }
+
 }
 </script>
 <style lang="stylus" scoped>
 @import '~@/assets/styles/variable.styl';
 
-.#edit-box::-webkit-scrollbar { /* 滚动条整体样式 */
-  width: 10px; /* 高宽分别对应横竖滚动条的尺寸 */
-  height: 1px;
-}
-
-#edit-box::-webkit-scrollbar-thumb { /* 滚动条里面小方块 */
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: #535353;
-}
-
-.#edit-box::-webkit-scrollbar-track { /* 滚动条里面轨道 */
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  background: #EDEDED;
-}
-
 #edit-box {
-  visibility: hidden;
+  transform: translateX(-105%);
+  transition: all 0.5s ease-out;
   position: relative;
   width: 35%;
+  height: 80%;
   display: flex;
   border-radius: 5px;
   box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -165,9 +158,26 @@ export default {
 
   .edit-container {
     overflow-y: auto;
-    height: cacl(100vh - 90px);
+    height: calc(100vh - 110px);
     flex: 1;
     padding: 15px;
   }
+
+  .edit-container::-webkit-scrollbar { /* 滚动条整体样式 */
+    width: 8px; /* 高宽分别对应横竖滚动条的尺寸 */
+    height: 0px;
+  }
+
+  .edit-container::-webkit-scrollbar-thumb { /* 滚动条里面小方块 */
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: $mainColor;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 75%, transparent 75%, transparent);
+  }
+}
+
+.edit-container::-webkit-scrollbar-track { /* 滚动条里面轨道 */
+  border-radius: 5px;
+  background: #fff;
 }
 </style>

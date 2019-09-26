@@ -10,6 +10,7 @@ import htmlToPdf from '@/components/utils/htmlToPdf'
 Vue.use(htmlToPdf)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.prototype.bus = new Vue()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

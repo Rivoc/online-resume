@@ -54,23 +54,24 @@ export default {
     }
   },
   created () {
-    console.log('哈哈')
-    console.log(this.code)
     let n = 0
+    let len = this.code.length
     let _this = this
-    let len = _this.code.length
-    // 每10ms 写入一次
-    var setIn = setInterval(function () {
-      // 只显示作用
-      _this.$refs.ShowStyle.writeStyleCode(_this.code.substring(0, n))
-      // 渲染作用
-      // _this.$refs.ShowResume.responseStyleCode(_this.code.substring(0, n))
-      n++
-      if (n >= len) {
-        // 停止
-        clearInterval(setIn)
-      }
-    }, 10)
+
+    // Dom更新后再调用
+    this.$nextTick(function () {
+      var setIn = setInterval(function () {
+        // 只显示作用
+        _this.$refs.ShowStyle.writeStyleCode(_this.code.substring(0, n))
+        // 渲染作用
+        // _this.$refs.ShowResume.responseStyleCode(_this.code.substring(0, n))
+        n++
+        if (n >= len) {
+          // 停止
+          clearInterval(setIn)
+        }
+      }, 10)
+    })
   }
 
 }

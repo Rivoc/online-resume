@@ -3,8 +3,8 @@
     <header>
       <div class="inner-header">
         <div class="user">
-          <el-button>注册</el-button>
-          <el-button>登录</el-button>
+          <el-button @click="Register">注册</el-button>
+          <el-button @click="login">登录</el-button>
           <el-button @click="preview">预览/导出</el-button>
         </div>
         <div class="title">RESUME</div>
@@ -19,6 +19,12 @@ export default {
   methods: {
     preview () {
       this.$emit('preview')
+    },
+    login () {
+      this.bus.$emit('login')
+    },
+    Register () {
+      this.bus.$emit('Register')
     }
 
   }

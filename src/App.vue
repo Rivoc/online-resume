@@ -6,6 +6,9 @@
       <el-button @click="exit">退出</el-button>
       <el-button @click="toGetPdf">导出为PDF</el-button>
     </section>
+    <!-- <Register></Register> -->
+    <Login></Login>
+    <Register></Register>
     <main>
       <show-style ref="ShowStyle"></show-style>
       <edit-box :resume="
@@ -24,13 +27,17 @@ import EditBox from '@/components/EditBox'
 import ShowResume from '@/components/ShowResume'
 import ShowStyle from '@/components/ShowStyle'
 import { str } from '../static/mock/style.js'
+import Register from '@/components/Register'
+import Login from '@/components/Login'
 export default {
   name: 'App',
   components: {
     HomeHeader,
     EditBox,
     ShowResume,
-    ShowStyle
+    ShowStyle,
+    Register,
+    Login
   },
   data () {
     return {

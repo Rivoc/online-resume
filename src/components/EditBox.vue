@@ -119,7 +119,7 @@ export default {
 @import '~@/assets/styles/variable.styl';
 
 #edit-box {
-  transform: translateX(-105%);
+  transform: translateX(-110%);
   transition: all 0.5s ease-out;
   position: relative;
   width: 35%;

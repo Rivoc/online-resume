@@ -11,7 +11,8 @@
       <edit-box :resume="
                  resume">
       </edit-box>
-      <show-resume :resume="resume"></show-resume>
+      <show-resume :resume="resume"
+                   ref="ShowResume"></show-resume>
     </main>
   </div>
 </template>
@@ -61,11 +62,15 @@ export default {
     // Dom更新后再调用
     this.$nextTick(function () {
       var setIn = setInterval(function () {
-        // 只显示作用
+        // 样式代码展示
         _this.$refs.ShowStyle.writeStyleCode(_this.code.substring(0, n))
-        // 渲染作用
-        // _this.$refs.ShowResume.responseStyleCode(_this.code.substring(0, n))
+        // 渲染样式
+        _this.$refs.ShowResume.responseStyleCode(_this.code.substring(0, n))
+        if (n > 105) {
+          n = n + 5
+        }
         n++
+
         if (n >= len) {
           // 停止
           clearInterval(setIn)

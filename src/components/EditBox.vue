@@ -158,7 +158,7 @@ export default {
 
   .edit-container {
     overflow-y: auto;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 30px);
     flex: 1;
     padding: 15px;
   }

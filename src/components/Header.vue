@@ -3,9 +3,9 @@
     <header>
       <div class="inner-header">
         <div class="user">
-          <el-button @click="Register">注册</el-button>
-          <el-button @click="login">登录</el-button>
-          <el-button @click="preview">预览/导出</el-button>
+          <el-button @click.prevent="login">{{msg}}</el-button>
+          <el-button @click.native="Register">注册</el-button>
+          <el-button @click.prevent="preview">预览/导出</el-button>
         </div>
         <div class="title">RESUME</div>
 
@@ -16,17 +16,31 @@
 <script>
 export default {
   name: 'HomeHeader',
+  data () {
+    return {
+      msg: '登录'
+    }
+  },
   methods: {
     preview () {
       this.$emit('preview')
     },
     login () {
-      this.bus.$emit('login')
+      if (this.msg !== '登录') {
+
+      } else {
+        this.bus.$emit('Login')
+      }
     },
     Register () {
       this.bus.$emit('Register')
     }
 
+  },
+  mounted () {
+    this.bus.$on('loginsucc', (msg) => {
+      this.msg = `你好，${msg}`
+    })
   }
 }
 </script>

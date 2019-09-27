@@ -8,7 +8,7 @@
     </div>
     <div class="mask"
          @click="customize">
-      点我生成简历<i class="el-icon-right"></i>
+      生成简历<i class="el-icon-right"></i>
     </div>
   </div>
 

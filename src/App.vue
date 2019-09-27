@@ -6,7 +6,6 @@
       <el-button @click="exit">退出</el-button>
       <el-button @click="toGetPdf">导出为PDF</el-button>
     </section>
-    <!-- <Register></Register> -->
     <Login></Login>
     <Register></Register>
     <main>
@@ -97,8 +96,12 @@ export default {
   display: none;
 }
 
-.preview.preControl {
+.preview .preControl {
   display: block;
+}
+
+.preview #showStyle {
+  display: none;
 }
 
 main {

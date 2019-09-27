@@ -1,6 +1,6 @@
 <template>
-  <div id="container"
-       ref="Register">
+  <div id="re-container"
+       v-show="isShow">
     <div id="Register">
       <div class="close"><i class="el-icon-close"
            @click="close"></i></div>
@@ -18,7 +18,8 @@
                  :rules="rules"
                  ref="ruleForm"
                  label-width="100px"
-                 class="lruleForm">
+                 class="lruleForm"
+                 label-position="top">
           <!--:rules="xxx" 规则名，写在data里。规定ref的值等于model绑定的值-->
           <el-form-item label="用户名"
                         prop="username">
@@ -85,6 +86,7 @@ export default {
       }
     }
     return {
+      isShow: false,
       ruleForm: {
         pass: '',
         checkPass: '',
@@ -115,27 +117,35 @@ export default {
       user.setPassword(pass)
       user.signUp().then(() => {
         this.$message.success('注册成功')
-        this.$refs.Register.style.cssText = 'display:none;'
+        this.isShow = false
+        this.ruleForm.username = ''
+        this.ruleForm.pass = ''
+        this.ruleForm.checkPass = ''
         let body = document.getElementsByTagName('body')[0]
         body.style.cssText = 'overflow:auto'
-      }, (err) => {
+      }, () => {
         this.$message.error('用户名已被注册')
+        this.ruleForm.username = ''
+        this.ruleForm.pass = ''
+        this.ruleForm.checkPass = ''
       })
     },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
+    resetForm () {
+      this.ruleForm.username = ''
+      this.ruleForm.pass = ''
+      this.ruleForm.checkPass = ''
     },
     close () {
-      this.$refs.Register.style.cssText = 'display:none;'
+      this.isShow = false
       let body = document.getElementsByTagName('body')[0]
       body.style.cssText = 'overflow:auto'
     }
   },
   mounted () {
-    let _this = this
-    this.bus.$on('Register', function () {
-      console.log(this.$refs)
-      _this.$refs.Register.style.cssText = 'display:block'
+    let _this = this// 必须保存this，否则指向空实例
+    _this.bus.$off('Register')
+    _this.bus.$on('Register', function () {
+      _this.isShow = true
       let body = document.getElementsByTagName('body')[0]// 取消滚动条，使得对话框弹出页面禁止滚动
       body.style.cssText = 'overflow:hidden'
     })
@@ -144,7 +154,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-#container {
+#re-container {
   position: fixed;
   z-index: 3;
   top: 0;
@@ -152,7 +162,6 @@ export default {
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.2);
-  display: none;
 }
 
 #Register {
@@ -166,7 +175,7 @@ export default {
   border-radius: 5px;
   box-shadow: 0 0 20px 1px rgba(64, 158, 255, 0.3);
   width: 500px;
-  height: 300px;
+  height: 350px;
 
   .close {
     position: absolute;
@@ -194,6 +203,15 @@ export default {
 
   .wrap {
     padding: 30px 90px;
+    padding-bottom: 0;
+
+    .el-form-item {
+      margin-bottom: 2px;
+    }
+
+    .el-button {
+      margin-top: 15px;
+    }
 
     .normal, .blind {
       position: absolute;

@@ -20,12 +20,6 @@ export const str = {
 #showResume header h1 {
   font-size: 36px;
   margin-bottom: 10px;
-  margin-left: 20px;
-}
-
-#showResume header p {
-  letter-spacing: 20px;
-  margin-left: 20px;
 }
 
 #showResume header .upload:hover {
@@ -48,6 +42,7 @@ export const str = {
   height: 150px;
   line-height: 150px;
   text-align: center;
+  cursor:pointer;
 }
 #showResume header .upload p {
   position: absolute;

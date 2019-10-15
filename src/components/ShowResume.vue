@@ -4,14 +4,18 @@
          id="pdfDom">
       <header>
         <h1>{{resume.profile.name||'你的名字'}}</h1>
-        <div class="upload">
-          <el-upload class="avatar-uploader"
-                     :show-file-list="false"
-                     :action="ss">
+        <div class="upload"
+             id="upload-container">
+          <label class="avatar-uploader"
+                 style="display:block"
+                 for="files">
             <i class="el-icon-plus avatar-uploader-icon"></i>
-            <p>上传头像</p>
-          </el-upload>
 
+            <input type="file"
+                   @change="onFileChange"
+                   id="files"
+                   accept=".jpg, .jpeg, .png" />
+          </label>
         </div>
         <p>求职意向：{{resume.profile.job||'意向岗位'}}</p>
       </header>
@@ -143,6 +147,24 @@ export default {
   methods: {
     responseStyleCode (code) {
       this.styleCode = '<style lang="stylus" scoped>' + code + '</style>'
+    },
+    onFileChange (evt) {
+      let files = evt.target.files
+      let f = files[0]
+      let reader = new FileReader()
+      reader.onload = (function (theFile) {
+        return function (e) {
+          let upContainer = document.getElementById('upload-container')
+          upContainer.innerHTML = [
+            '<img src="',
+            e.target.result,
+            '" title="',
+            escape(theFile.name),
+            '"/>'
+          ].join('')
+        }
+      })(f)
+      reader.readAsDataURL(f)
     }
   },
   data () {
@@ -162,5 +184,16 @@ export default {
   border-radius: 5px;
   box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+}
+
+label {
+  position: relative;
+}
+
+#files {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
 </style>

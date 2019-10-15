@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export const str = {
   code: `
 /*开始制作简历
@@ -175,7 +176,7 @@ export const str = {
 }
 
 .award .content .timeInfo span {
-  font-weight: 800;
+  font-weight:800;
   flex: 1;
   font-size: 15px;
   margin-bottom: 5px;

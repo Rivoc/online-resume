@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import data from '../static/mock/data.json'
+import data from './mock/data.json'
 import HomeHeader from '@/components/Header'
 import EditBox from '@/components/EditBox'
 import ShowResume from '@/components/ShowResume'
 import ShowStyle from '@/components/ShowStyle'
-import { str } from '../static/mock/style.js'
+import { str } from './mock/style.js'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 export default {
